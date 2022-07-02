@@ -1,0 +1,39 @@
+{
+  "name": "moryggan",
+  "version": "1.0.0",
+  "description": "Server Application",
+  "main": "src/app.js",
+  "scripts": {
+    "start:dev": "nodemon ./src/server.js",
+    "start:prod": "node ./dist/server.js",
+    "build": "babel -d ./dist ./src -s",
+    "prepare": "husky install",
+    "lint": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npx eslint --fix"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.18.6",
+    "@babel/core": "^7.18.6",
+    "@babel/node": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.18.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-import": "^2.26.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "nodemon": "^2.0.18"
+  },
+  "dependencies": {
+    "errorhandler": "^1.5.1",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0"
+  }
+}

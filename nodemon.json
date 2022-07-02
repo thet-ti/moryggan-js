@@ -1,0 +1,5 @@
+{
+  "verbose": true,
+  "watch": ["./src/**/*.js"],
+  "exec": "babel-node {{filename}}"
+}
