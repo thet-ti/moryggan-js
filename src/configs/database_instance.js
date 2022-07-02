@@ -1,10 +1,14 @@
 /* eslint-disable global-require */
-import { Sequelize } from 'sequelize';
+import Sequelize from 'sequelize';
 import fs from 'fs';
 import path from 'path';
 import { NodeEnvEnum } from '../enumerators/node_env';
 import { env } from '../utils/env';
 import { logger } from '../utils/logger';
+
+// eslint-disable-next-line import/no-extraneous-dependencies
+require('@babel/register');
+require('core-js/stable');
 
 const sequelize = new Sequelize(
   env.DB_DATABASE,
@@ -43,9 +47,17 @@ fs
   .filter((f) => f.endsWith('.js'))
   .forEach((f) => {
     // eslint-disable-next-line import/no-dynamic-require
-    const model = require(path.join(modelsDir, f))(sequelize, Sequelize.DataTypes);
+    let model = require(path.join(modelsDir, f));
+
+    model = model.default(sequelize, Sequelize.DataTypes);
 
     db.models[model.name] = model;
   });
+
+Object.keys(db.models).forEach((modelName) => {
+  if (db.models[modelName].associate) {
+    db.models[modelName].associate(db.models);
+  }
+});
 
 export { db };

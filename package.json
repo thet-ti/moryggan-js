@@ -8,7 +8,11 @@
     "start:prod": "node ./dist/server.js",
     "build": "babel -d ./dist ./src -s",
     "prepare": "husky install",
-    "lint": "lint-staged"
+    "lint": "lint-staged",
+    "db:migration": "npx sequelize-cli db:migrate",
+    "db:migration:create": "npx sequelize-cli migration:generate --name",
+    "db:seed": "npx sequelize-cli db:seed:all",
+    "db:update": "npm run db:migration && npm run db:seed"
   },
   "lint-staged": {
     "*.js": [
@@ -33,13 +37,18 @@
     "nodemon": "^2.0.18"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
     "core-js": "^3.23.3",
+    "dotenv": "^16.0.1",
     "errorhandler": "^1.5.1",
     "express": "^4.18.1",
+    "http-status": "^1.5.2",
     "moment": "^2.29.3",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
     "sequelize": "^6.21.2",
-    "winston": "^3.8.1"
+    "winston": "^3.8.1",
+    "yup": "^0.32.11"
   }
 }

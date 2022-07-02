@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 export const getEnv = (key) => (process.env[key]);
 
 export const env = {
@@ -7,4 +9,5 @@ export const env = {
   DB_USERNAME: getEnv('DB_USERNAME') || 'root',
   DB_PASSWORD: getEnv('DB_PASSWORD') || 'root',
   DB_HOST: getEnv('DB_HOST') || 'localhost',
+  HASH_SALT: getEnv('HASH_SALT') || 8,
 };
